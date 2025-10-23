@@ -1,0 +1,22 @@
+{
+  "name": "presentation-agent-skills",
+  "owner": {
+    "name": "Info at adaptivex",
+    "email": "info@adaptivex.ca"
+  },
+  "metadata": {
+    "description": "Presentation Skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "example-skills",
+      "description": "Collection of example skills demonstrating various capabilities for generating presentations",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./gamma-presentation-generator"
+      ]
+    }
+  ]
+}
