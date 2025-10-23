@@ -973,172 +973,158 @@ These principles define what makes reveal.js presentations effective:
 - **Consistent styling**: Apply theme across all slides automatically
 - **Logo integration**: Add brand logos to slides using CSS background images
 
-## What NOT to Do
+## Best Practices for Reveal.js Presentations
 
-Critical mistakes that break the Gamma philosophy:
+Follow these guidelines to create effective reveal.js presentations:
 
-### ❌ Don't Use Fixed Heights for Cards
-```css
-/* WRONG */
-.gamma-card {
-    height: 600px; /* This forces content to fit a box */
-    overflow: hidden; /* This hides overflow content */
-}
-
-/* CORRECT */
-.gamma-card {
-    height: auto; /* Let content determine height */
-    min-height: auto; /* Don't enforce minimums */
-}
-```
-
-### ❌ Don't Scale Text Below 16px
-```css
-/* WRONG */
-@media (max-width: 768px) {
-    p { font-size: 12px; } /* Too small to read */
-}
-
-/* CORRECT */
-@media (max-width: 768px) {
-    p { font-size: max(16px, 4vw) !important; } /* Always readable */
-}
-```
-
-### ❌ Don't Use Horizontal Slide Navigation
-```javascript
-// WRONG - Don't use reveal.js or similar
-Reveal.initialize({
-    transition: 'slide',
-    navigation: 'horizontal'
-});
-
-// CORRECT - Use vertical scrolling
-window.scrollTo({ top: nextSlide.offsetTop, behavior: 'smooth' });
-```
-
-### ❌ Don't Require External Libraries
+### ✅ Always Include Reveal.js CDN Links
 ```html
-<!-- WRONG -->
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
-
-<!-- CORRECT -->
-<style>
-    /* All CSS inline */
-</style>
-<script>
-    // All JavaScript inline
-</script>
+<!-- CORRECT - Include reveal.js from CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/black.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
 ```
 
-### ❌ Don't Use overflow: hidden on Content Containers
+### ✅ Use Proper Reveal.js Structure
+```html
+<!-- CORRECT - Reveal.js structure -->
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Slide Content</h2>
+        </section>
+    </div>
+</div>
+```
+
+### ✅ Initialize Reveal.js with Configuration
+```javascript
+// CORRECT - Initialize with options
+Reveal.initialize({
+    controls: true,
+    progress: true,
+    slideNumber: true,
+    transition: 'slide',
+    center: true
+});
+```
+
+### ✅ Use CSS Variables for Custom Theming
 ```css
-/* WRONG */
-.card-content {
-    overflow: hidden; /* Cuts off long content */
-    max-height: 500px; /* Forces artificial limits */
+/* CORRECT - Override reveal.js with custom brand colors */
+:root {
+    --primary-color: #403c8b;
+    --accent-color: #5a56b8;
 }
 
-/* CORRECT */
-.card-content {
-    overflow: visible; /* Let content show naturally */
-    height: auto; /* No artificial limits */
+.reveal section {
+    background: var(--primary-color);
 }
+```
+
+### ✅ Keep Content Concise Per Slide
+```html
+<!-- CORRECT - One main idea per slide -->
+<section>
+    <h2>Key Point</h2>
+    <ul>
+        <li>Supporting point 1</li>
+        <li>Supporting point 2</li>
+        <li>Supporting point 3</li>
+    </ul>
+</section>
 ```
 
 ## Testing the Implementation
 
-Use these test cases to verify your Gamma presentations work correctly:
+Use these test cases to verify your reveal.js presentations work correctly:
 
-### Test 1: Mobile Responsiveness Test
-**Objective**: Verify cards grow to fit content on mobile devices
-
-**Steps**:
-1. Create a slide with 20+ bullet points (lots of content)
-2. Open the HTML file in a browser
-3. Resize window to mobile width (<768px)
-4. Inspect the slide card
-
-**Expected Results**:
-- ✅ Card grows taller to accommodate all content
-- ✅ Text stays at 16px or larger
-- ✅ All bullet points are visible without scrolling within the card
-- ✅ No horizontal scrolling required
-- ❌ Card does NOT have a fixed height
-- ❌ Text does NOT shrink below 16px
-
-### Test 2: Vertical Scroll Navigation Test
-**Objective**: Ensure navigation is vertical, not horizontal
+### Test 1: Slide Navigation Test
+**Objective**: Verify horizontal slide navigation works properly
 
 **Steps**:
-1. Open the presentation in a browser
+1. Open the HTML file in a browser
 2. Try to navigate using:
-   - Mouse scroll wheel
-   - Arrow down/up keys
-   - Spacebar
+   - Arrow left/right keys
+   - Spacebar (forward)
+   - Click controls (bottom right)
    - Touch swipe (on mobile)
 
 **Expected Results**:
-- ✅ Scrolling is smooth and vertical
-- ✅ Arrow keys move between slides vertically
-- ✅ Progress bar updates as you scroll
-- ❌ No left/right arrow navigation
-- ❌ No horizontal sliding transitions
+- ✅ Arrow keys move between slides horizontally
+- ✅ Smooth slide transitions
+- ✅ Progress bar updates as you navigate
+- ✅ Slide numbers increment correctly
+- ✅ Controls are visible and functional
 
-### Test 3: Offline Functionality Test
-**Objective**: Verify presentation works without internet connection
-
-**Steps**:
-1. Save the HTML file to your local computer
-2. Disconnect from the internet
-3. Open the HTML file in a browser
-
-**Expected Results**:
-- ✅ Presentation loads instantly
-- ✅ All styles render correctly
-- ✅ JavaScript features work (progress bar, keyboard nav)
-- ✅ No broken resources or missing elements
-- ❌ No error messages about failed CDN requests
-- ❌ No missing fonts or styles
-
-### Test 4: Font Size Minimum Test
-**Objective**: Confirm text never shrinks below readable sizes
+### Test 2: Responsive Design Test
+**Objective**: Ensure presentation scales properly on different devices
 
 **Steps**:
 1. Open presentation in browser
 2. Use browser DevTools to simulate various screen sizes:
-   - 320px (small phone)
-   - 375px (iPhone SE)
+   - 375px (mobile phone)
    - 768px (tablet)
    - 1024px (laptop)
    - 1920px (desktop)
-3. Inspect font sizes using DevTools computed styles
 
 **Expected Results**:
-- ✅ Body text: Never below 16px
-- ✅ H2 headings: Never below 24px
-- ✅ H1 titles: Never below 32px
-- ✅ All text is easily readable at all sizes
-- ❌ No text smaller than 16px at any viewport width
+- ✅ Content scales appropriately for each screen size
+- ✅ Text remains readable at all sizes
+- ✅ Controls and progress bar remain accessible
+- ✅ No horizontal scrolling required
+- ✅ Touch swipe works on mobile
 
-### Test 5: Long Content Card Growth Test
-**Objective**: Verify cards expand naturally for varying content lengths
+### Test 3: Reveal.js Features Test
+**Objective**: Verify reveal.js interactive features work
 
 **Steps**:
-1. Create three slides:
-   - Slide A: 3 bullet points (short content)
-   - Slide B: 15 bullet points (medium content)
-   - Slide C: 30 bullet points (long content)
-2. View on mobile (<768px) and desktop (>1024px)
+1. Open the presentation in a browser
+2. Test these features:
+   - Press ESC or 'O' for overview mode
+   - Check progress bar at bottom
+   - Verify slide numbers display
+   - Test keyboard navigation
 
 **Expected Results**:
-- ✅ All three slides have different heights based on content
-- ✅ Slide C is much taller than Slide A
-- ✅ All content is visible without internal scrolling
-- ✅ No "view more" buttons or truncation
-- ❌ Cards are NOT the same height
-- ❌ No content is cut off or hidden
+- ✅ Overview mode shows all slides in grid
+- ✅ Progress bar fills as you advance
+- ✅ Slide numbers appear (e.g., "1 / 10")
+- ✅ All keyboard shortcuts work
+- ✅ Can click slides in overview to jump
+
+### Test 4: Custom Theming Test
+**Objective**: Confirm custom theme CSS variables are applied
+
+**Steps**:
+1. Open presentation in browser
+2. Inspect elements with DevTools
+3. Check computed styles for custom variables
+
+**Expected Results**:
+- ✅ Custom colors from :root variables are applied
+- ✅ Background colors match theme
+- ✅ Text colors have good contrast
+- ✅ Logo appears if configured
+- ✅ Theme overrides reveal.js defaults
+
+### Test 5: Content Display Test
+**Objective**: Verify all slide types render correctly
+
+**Steps**:
+1. Create slides with different layouts:
+   - Title slide
+   - Content with bullet points
+   - Feature grid
+   - Two-column layout
+2. Navigate through all slides
+
+**Expected Results**:
+- ✅ All slides render without layout issues
+- ✅ Grids and columns display properly
+- ✅ Headers and banners styled correctly
+- ✅ No overlapping content
+- ✅ Consistent spacing throughout
 
 ### Test 6: Accessibility Test
 **Objective**: Ensure presentations work with assistive technologies
@@ -1173,58 +1159,71 @@ Use these test cases to verify your Gamma presentations work correctly:
 
 ## Troubleshooting Common Issues
 
-### Issue: Cards Have Fixed Height on Mobile
+### Issue: Reveal.js Not Loading
 
-**Symptom**: Content is cut off or requires scrolling within cards on mobile devices
+**Symptom**: Presentation shows as plain HTML without slide functionality
 
-**Solution**:
+**Solution**: Verify CDN links are correct and accessible:
+```html
+<!-- Check these links -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+
+<!-- Ensure Reveal.initialize() is called -->
+<script>
+    Reveal.initialize({ /* config */ });
+</script>
+```
+
+### Issue: Slides Don't Navigate
+
+**Symptom**: Arrow keys or controls don't change slides
+
+**Solution**: Check reveal.js structure is correct:
+```html
+<div class="reveal">
+    <div class="slides">
+        <section>Content</section>
+    </div>
+</div>
+```
+
+### Issue: Custom Theme Not Applied
+
+**Symptom**: Presentation uses default black theme despite custom CSS
+
+**Solution**: Ensure CSS variables are defined and use `!important` if needed:
 ```css
-@media (max-width: 768px) {
-    .gamma-card {
-        height: auto !important;
-        min-height: auto !important;
-        max-height: none !important;
-    }
+.reveal h1, .reveal h2 {
+    color: var(--text-primary) !important;
+}
+
+.reveal section {
+    background: var(--card-bg) !important;
 }
 ```
 
-### Issue: Text is Too Small on Mobile
+### Issue: Content Overflows on Small Screens
 
-**Symptom**: Font sizes drop below 16px on small screens
+**Symptom**: Text or elements extend beyond slide boundaries on mobile
 
-**Solution**:
+**Solution**: Add responsive padding and max-width:
 ```css
-@media (max-width: 768px) {
-    p, li {
-        font-size: max(16px, 4vw) !important;
-    }
-    h2 {
-        font-size: max(24px, 6vw) !important;
-    }
-    h1 {
-        font-size: max(32px, 8vw) !important;
-    }
-}
-```
-
-### Issue: Presentation Requires Internet Connection
-
-**Symptom**: Styles or scripts fail to load when offline
-
-**Solution**: Ensure all CSS and JavaScript are inline in the HTML file. Remove any external `<link>` or `<script src="">` tags that reference CDNs.
-
-### Issue: Horizontal Scrolling Appears
-
-**Symptom**: Users can scroll left/right, content overflows horizontally
-
-**Solution**:
-```css
-body {
-    overflow-x: hidden;
-}
-
-.gamma-card {
+.reveal section {
+    padding: 1rem;
     max-width: 100%;
     box-sizing: border-box;
 }
+```
+
+### Issue: Progress Bar Not Showing
+
+**Symptom**: Progress bar doesn't appear at bottom of presentation
+
+**Solution**: Ensure it's enabled in Reveal.initialize():
+```javascript
+Reveal.initialize({
+    progress: true,  // Enable progress bar
+    slideNumber: true  // Also show slide numbers
+});
 ```
