@@ -40,6 +40,294 @@ Trigger this skill when users request:
 - "Make this more engaging"
 - "Improve the flow of this deck"
 
+## Instructions
+
+When a user requests a presentation, follow these steps to generate a Gamma AI-style vertical scroll presentation:
+
+### 1. Identify the Request Type
+
+Recognize these triggers:
+- "Create a presentation about [topic]"
+- "Build slides for [subject]"
+- "Generate a deck on [topic]"
+- "Make a presentation from [content/file]"
+- "Convert [document] to slides"
+
+### 2. Gather Requirements
+
+Ask clarifying questions if not provided:
+```
+- Topic/Subject (required)
+- Purpose: Inform/Educate/Persuade/Inspire
+- Audience: Technical/Executive/General/Students
+- Length: Number of slides or presentation duration
+- Style: Professional/Creative/Academic/Casual
+```
+
+### 3. Generate Presentation Structure
+
+Create this markdown format with `---` separating slides:
+
+```markdown
+# [Main Title]
+[Subtitle or tagline]
+
+---
+
+## [Section Title]
+
+[Content with bullet points, paragraphs, or features]
+
+---
+
+## [Next Section]
+
+### [Subsection if needed]
+- Point 1
+- Point 2
+- Point 3
+
+---
+```
+
+### 4. Content Generation Rules
+
+#### For Title Slides:
+```markdown
+# [Compelling Title]
+[Descriptive subtitle that sets context]
+[Optional: Date, presenter name, or organization]
+```
+
+#### For Content Slides:
+```markdown
+## [Clear Section Header]
+
+[Introduction paragraph if needed]
+
+- [Concise bullet point]
+- [Another key point]
+- [Supporting information]
+
+> [Important quote or callout if relevant]
+```
+
+#### For Feature/Benefit Slides:
+```markdown
+## [Section Title]
+
+🚀 **[Feature Name]**
+[Brief description of the feature]
+
+💡 **[Another Feature]**
+[Description of this feature]
+
+🎯 **[Third Feature]**
+[Description of the third feature]
+```
+
+#### For Data/Statistics Slides:
+```markdown
+## [Data Section Title]
+
+**Key Metrics:**
+- [Metric 1]: [Value]
+- [Metric 2]: [Value]
+- [Metric 3]: [Value]
+
+[Explanatory paragraph about what the data means]
+```
+
+#### For Conclusion/CTA Slides:
+```markdown
+## [Conclusion Title]
+
+### Key Takeaways
+1. [Main point 1]
+2. [Main point 2]
+3. [Main point 3]
+
+**[Call to action or next steps]**
+```
+
+### 5. Apply Content Guidelines
+
+**Length Guidelines:**
+- Title slides: 1-2 sentences
+- Content slides: 3-7 bullet points OR 2-3 short paragraphs
+- Feature slides: 3-6 features with descriptions
+- Data slides: 3-5 key metrics with context
+
+**Writing Style:**
+- Use active voice
+- Keep sentences under 20 words when possible
+- One idea per bullet point
+- Avoid jargon unless audience is technical
+- Use concrete examples over abstract concepts
+
+**Visual Suggestions:**
+When appropriate, suggest images by adding:
+```markdown
+<!-- Image suggestion: [description of ideal image] -->
+```
+
+### 6. Slide Count by Presentation Type
+
+- **5-minute pitch**: 5-7 slides
+  1. Title/Hook
+  2. Problem
+  3. Solution
+  4. Benefits/Features
+  5. Traction/Proof
+  6. Ask/CTA
+
+- **10-minute presentation**: 8-12 slides
+  1. Title
+  2. Agenda/Overview
+  3-9. Main content (6-7 slides)
+  10. Summary
+  11. Q&A/Contact
+
+- **Educational/Training**: 15-20 slides
+  1. Title
+  2. Learning objectives
+  3-17. Content with examples
+  18. Recap
+  19. Resources
+  20. Questions
+
+- **Status Update**: 6-8 slides
+  1. Title
+  2. Executive Summary
+  3. Progress/Achievements
+  4. Challenges
+  5. Solutions/Mitigations
+  6. Next Steps
+  7. Timeline
+  8. Questions
+
+### 7. Output Format
+
+Always provide:
+
+1. **The Markdown Content** (ready to convert)
+2. **Speaker Notes** (if requested)
+3. **Image Suggestions** (if relevant)
+4. **Customization Tips**
+
+Example output structure:
+```
+Here's your presentation about [topic]:
+
+[MARKDOWN CONTENT]
+
+---
+
+**Customization Suggestions:**
+- Consider adding [specific data] to slide 3
+- Include your company logo on the title slide
+- Add team photos to slide 5
+
+**Image Suggestions:**
+- Slide 2: [Image description]
+- Slide 4: [Image description]
+```
+
+### 8. Integration with Other Skills
+
+When other skills are available, enhance the presentation:
+
+```javascript
+// If image-generation skill is available:
+if (skills.includes('image-generation')) {
+    // Add note: "<!-- Generate image: [prompt] -->"
+}
+
+// If data-visualization skill is available:
+if (skills.includes('data-visualization')) {
+    // Add note: "<!-- Create chart: [data description] -->"
+}
+
+// If content-research skill is available:
+if (skills.includes('content-research')) {
+    // Add note: "<!-- Research needed: [topic] -->"
+}
+```
+
+### 9. Error Handling
+
+If unable to generate presentation:
+- Explain why (missing information, unclear request)
+- Provide a template the user can fill in
+- Offer to generate a different type of presentation
+
+### 10. Quality Checklist
+
+Before outputting, verify:
+- [ ] Clear narrative flow from slide to slide
+- [ ] No slide has too much content (max 150 words)
+- [ ] Each slide has a clear purpose
+- [ ] Consistent formatting throughout
+- [ ] Opening hooks audience attention
+- [ ] Closing has clear next steps
+- [ ] Content matches stated audience level
+- [ ] Total length appropriate for time limit
+
+### Examples of Complete Flows
+
+#### Example 1: Business Pitch
+**Input**: "Create a pitch deck for our AI tutoring app"
+
+**Output**:
+```markdown
+# EduAI: Personalized Learning at Scale
+Revolutionizing education with AI-powered tutoring
+October 2024
+
+---
+
+## The Problem
+
+### Education is Failing Students
+- 68% of students struggle with standard teaching pace
+- 1-on-1 tutoring costs $40-100/hour
+- Teachers overwhelmed with 30+ students per class
+- Learning gaps compound over time
+
+---
+
+## Our Solution
+
+### AI Tutoring That Adapts to Every Student
+
+🧠 **Personalized Learning Paths**
+Adjusts difficulty and pace in real-time
+
+💬 **24/7 Availability**
+Students get help whenever they need it
+
+📊 **Progress Analytics**
+Teachers and parents see detailed insights
+
+💰 **Affordable Access**
+$9.99/month vs $400+/month for human tutors
+
+---
+
+[Continue with more slides...]
+```
+
+### Final Notes
+
+- Always optimize for mobile viewing (cards that grow, not shrink)
+- Maintain minimum font sizes (16px body, 24px headers)
+- Use semantic markdown for better conversion
+- Include metadata comments for enhanced processing
+- Prioritize clarity over cleverness
+- When in doubt, use fewer words
+
+This instruction set ensures consistent, high-quality presentation generation that follows the Gamma AI vertical-scroll philosophy while remaining flexible enough to handle various content types and user needs.
+
 ## Workflow
 
 ### Step 1: Understand the Input
