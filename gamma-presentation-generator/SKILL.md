@@ -939,41 +939,39 @@ To use this skill effectively:
 
 The result: Presentations that communicate clearly, engage audiences, and work beautifully across all devices and formats.
 
-## Core Gamma AI Principles
+## Core Reveal.js Principles
 
-These principles define what makes a Gamma-style presentation superior to traditional slide formats:
+These principles define what makes reveal.js presentations effective:
 
-### 1. Vertical Scrolling
-- **Natural web-like navigation**: Users scroll down, not click through horizontal slides
-- **Continuous flow**: Content flows naturally like a webpage, not discrete chunks
-- **Familiar interaction**: Everyone knows how to scroll; it's intuitive and accessible
-- **No pagination anxiety**: Users can see their progress and navigate freely
+### 1. Horizontal Slide Navigation
+- **Professional presentation format**: Traditional slide-to-slide progression
+- **Smooth transitions**: Configurable slide transitions (slide, fade, convex, etc.)
+- **Multiple navigation methods**: Arrow keys, space bar, click controls, or touch swipe
+- **Progress tracking**: Built-in progress bar and slide numbers
 
-### 2. Cards Grow on Mobile
-- **Content-first sizing**: Cards expand to fit content, not the other way around
-- **No text shrinking**: Font sizes never drop below readable minimums (16px body, 24px h2, 32px h1)
-- **Natural height**: Use `height: auto !important` on mobile to let cards breathe
-- **Responsive by design**: Same content works on 4" phones and 27" monitors
+### 2. Responsive Design
+- **Adapts to all screens**: Automatically scales content for different viewport sizes
+- **Touch-friendly**: Swipe gestures work on tablets and phones
+- **Keyboard accessible**: Full keyboard navigation support
+- **Readable on all devices**: Content remains clear from phones to projectors
 
-### 3. Minimum Font Sizes
-- **Always readable**: Use CSS `max()` function to enforce minimums
-  - Body: `max(16px, min(2vw, 18px))`
-  - H2: `max(24px, min(4vw, 36px))`
-  - H1: `max(32px, min(6vw, 48px))`
-- **No squinting**: Text remains legible on all screen sizes
-- **Accessibility first**: Readable text benefits everyone, especially mobile users
+### 3. Interactive Features
+- **Overview mode**: Press ESC or 'O' to see all slides at once
+- **Speaker notes**: Press 'S' for presenter mode with notes and timer
+- **Fragments**: Progressive reveal of content within slides
+- **Slide numbers and progress**: Visual indicators of position in presentation
 
-### 4. No External Dependencies
-- **Self-contained files**: Everything in one HTML file (CSS and JavaScript inline)
-- **Works offline**: No CDN dependencies means presentations work anywhere
-- **Future-proof**: No broken links when external services change
-- **Fast loading**: No network requests means instant presentation loading
+### 4. Reveal.js Framework Benefits
+- **CDN-hosted**: Fast, reliable delivery from jsdelivr CDN
+- **Well-maintained**: Active open-source project with regular updates
+- **Feature-rich**: Built-in transitions, themes, and plugins
+- **Widely used**: Industry-standard presentation framework
 
-### 5. Progressive Enhancement
-- **Works without JavaScript**: Core content is accessible even if JS fails
-- **Enhanced with JS**: Smooth scrolling, progress bar, and keyboard nav are bonuses
-- **Semantic HTML**: Screen readers and accessibility tools work perfectly
-- **Print-friendly**: CSS can be adapted for print media queries
+### 5. Custom Theming
+- **CSS variables**: Easy brand customization via :root variables
+- **Override reveal.js defaults**: Keep framework features while applying brand colors
+- **Consistent styling**: Apply theme across all slides automatically
+- **Logo integration**: Add brand logos to slides using CSS background images
 
 ## What NOT to Do
 
