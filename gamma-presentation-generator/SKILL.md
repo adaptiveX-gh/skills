@@ -1,30 +1,30 @@
 ---
 name: gamma-presentation-generator
-description: Content-first presentation generator that transforms ideas, documents, and outlines into Gamma AI-style vertical scrolling presentations. Generates self-contained HTML with mobile-responsive cards that grow to fit content. Includes comprehensive theming system with brand color support (uses Brandfetch for automatic brand extraction). No reveal.js or external dependencies. This skill should be used when users request presentation creation, slide generation, pitch deck building, or content conversion to presentation format.
+description: Content-first presentation generator that transforms ideas, documents, and outlines into professional reveal.js presentations. Generates HTML presentations with horizontal slide navigation, custom theming, and mobile-responsive design. Includes comprehensive theming system with brand color support (uses Brandfetch for automatic brand extraction). Uses reveal.js framework for smooth transitions and interactive features. This skill should be used when users request presentation creation, slide generation, pitch deck building, or content conversion to presentation format.
 ---
 
-# Gamma Presentation Generator
+# Reveal.js Presentation Generator
 
 ## Purpose
 
-Transform ideas, outlines, documents, or natural language prompts into Gamma AI-style vertical scrolling presentations. This skill generates self-contained HTML files with mobile-responsive cards that prioritize readability and accessibility. Unlike traditional slide-based presentations, Gamma presentations use vertical scrolling with cards that expand to fit content - ensuring perfect readability on all devices from phones to large displays.
+Transform ideas, outlines, documents, or natural language prompts into professional reveal.js presentations. This skill generates HTML files with horizontal slide navigation, smooth transitions, and custom theming that prioritize readability and engagement. Presentations use the reveal.js framework for interactive features including keyboard navigation, overview mode, and progress tracking - ensuring a polished presentation experience on all devices.
 
 ## Core Philosophy
 
-**Gamma AI Vertical Scrolling**: This skill generates presentations that embrace the Gamma AI philosophy - vertical scrolling with responsive cards that grow to fit content. Key principles:
+**Reveal.js Presentations**: This skill generates presentations that use the reveal.js framework for professional, interactive presentations. Key principles:
 
-1. **Vertical Navigation**: Natural scrolling like a webpage, not horizontal slide clicking
-2. **Cards Grow on Mobile**: Content determines card height; text never shrinks below readable sizes (16px minimum)
-3. **Self-Contained HTML**: No external dependencies or CDN links; presentations work offline
+1. **Horizontal Navigation**: Smooth slide-to-slide transitions with keyboard, mouse, or touch controls
+2. **Responsive Design**: Presentations adapt to all screen sizes while maintaining readability
+3. **Reveal.js Framework**: Uses CDN-hosted reveal.js for reliable, feature-rich presentations
 4. **Content-First Approach**: Narrative structure and compelling content over visual gimmicks
-5. **Progressive Enhancement**: Accessible core content enhanced with JavaScript features
-6. **Mobile-First Design**: Optimized for phones first, then tablets and desktops
+5. **Custom Theming**: CSS variables allow easy brand customization while keeping reveal.js features
+6. **Interactive Features**: Progress bar, slide numbers, overview mode (press ESC), and speaker notes
 
 **This skill excels at:**
 
 1. **Intelligent Content Organization**: Taking raw ideas and structuring them into logical, persuasive narratives
 2. **Adaptive Structuring**: Applying appropriate narrative frameworks based on presentation goals
-3. **Gamma-Style HTML Generation**: Creating self-contained, accessible presentations that work on all devices
+3. **Reveal.js HTML Generation**: Creating interactive, professional presentations with smooth transitions
 4. **Smart Enhancements**: Adding visual suggestions, speaker notes, statistics, and call-to-action elements
 
 ## When to Use This Skill
@@ -40,7 +40,7 @@ Trigger this skill when users request:
 ### Conversion Requests
 - "Turn this document into a presentation"
 - "Convert these notes to slides"
-- "Make this into Gamma format"
+- "Make this into reveal.js format"
 - "Transform this outline into a deck"
 
 ### Enhancement Requests
@@ -285,28 +285,27 @@ When appropriate, suggest images by adding:
 
 ### 7. Output Format
 
-Generate a vertical-scrolling HTML document using the template structure. Always provide:
+Generate a reveal.js HTML presentation using the template structure. Always provide:
 
-1. **Self-contained HTML file** (no external dependencies)
-2. **Vertical scrolling navigation** (not horizontal slides)
-3. **Mobile-responsive cards** (that grow to fit content)
-4. **Minimum readable font sizes** (never shrink below 16px)
+1. **Reveal.js HTML file** (uses CDN for reveal.js framework)
+2. **Horizontal slide navigation** (smooth transitions between slides)
+3. **Mobile-responsive design** (presentations adapt to all screen sizes)
+4. **Custom theming** (CSS variables for brand colors and styling)
 
 #### Template Usage:
 
 Use `templates/template.html` as the base structure. Follow these steps:
 
-1. **Copy template.html**
-2. **Select theme** from `styles/themes.css` and paste :root variables
-3. **Copy core styles** from `styles/core.css` into the <style> section
-4. **Replace placeholders** ({{PRESENTATION_TITLE}}, {{SLIDE_TITLE}}, etc.) with actual content
-5. **Add/remove slides** as needed for the presentation length
+1. **Copy template.html** (includes reveal.js CDN links)
+2. **Customize theme** by updating CSS variables in the :root section
+3. **Replace placeholders** ({{PRESENTATION_TITLE}}, {{SLIDE_TITLE}}, etc.) with actual content
+4. **Add/remove <section>** elements as needed for the presentation length
+5. **Configure reveal.js** options in the JavaScript initialization if needed
 
 #### Quick Reference - File Locations:
 
 - **Template**: `gamma-presentation-generator/templates/template.html`
-- **Themes**: `gamma-presentation-generator/styles/themes.css`
-- **Core CSS**: `gamma-presentation-generator/styles/core.css`
+- **Themes**: Custom CSS variables in the template file
 - **Documentation**: `gamma-presentation-generator/themes.md`
 
 #### Minimal HTML Structure:
@@ -314,39 +313,39 @@ Use `templates/template.html` as the base structure. Follow these steps:
 See `templates/template.html` for the complete structure. Key elements:
 
 ```html
-<!-- 1. Define theme variables (copy from styles/themes.css) -->
+<!-- 1. Include reveal.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/black.css">
+
+<!-- 2. Define custom theme variables -->
 <style>
     :root {
-        --gamma-primary: #403c8b;  /* Your brand color */
-        --gamma-accent: #5a56b8;    /* Accent color */
-        --logo-url: url('data:image/...');  /* Logo as data URI */
+        --primary-color: #403c8b;  /* Your brand color */
+        --accent-color: #5a56b8;    /* Accent color */
+        --logo-url: none;  /* Logo URL or data URI */
         /* ... other theme variables ... */
     }
-    /* 2. Include core.css styles here */
+    /* Custom styles to override reveal.js defaults */
 </style>
 
-<!-- 3. Add slide structure -->
-<main class="presentation">
-    <section class="slide">
-        <div class="gamma-card">
-            <div class="card-content">
-                <h2>Slide Title</h2>
-                <p>Content here...</p>
-            </div>
-        </div>
-    </section>
-</main>
+<!-- 3. Add reveal.js structure -->
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Slide Title</h2>
+            <p>Content here...</p>
+        </section>
+    </div>
+</div>
 
-<!-- 4. Add JavaScript for interactivity -->
+<!-- 4. Include reveal.js JavaScript and initialize -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
 <script>
-    /* Copy JavaScript from template.html */
+    Reveal.initialize({ /* options */ });
 </script>
 ```
 
-**For complete examples:** See the presentation files in the repository:
-- `niagara-falls-bank-theme.html`
-- `niagara-falls-adaptivex-theme.html`
-- `niagara-falls-gamma.html`
+**For complete examples:** See the template file at `templates/template.html`
 
 ### 8. Integration with Other Skills
 
@@ -434,23 +433,23 @@ $9.99/month vs $400+/month for human tutors
 
 ### Final Notes
 
-**CRITICAL - Gamma AI Philosophy:**
-- **Always generate self-contained HTML files** - No reveal.js or external dependencies
-- **Vertical scrolling ONLY** - Never use horizontal slide navigation
-- **Cards grow on mobile** - Use `height: auto !important` on mobile viewports
-- **Enforce minimum font sizes** - Use CSS `max()` to prevent text shrinking below 16px
-- **Content determines card height** - Never use fixed heights that cut off content
-- **Progressive enhancement** - Works without JavaScript, enhanced with it
+**CRITICAL - Reveal.js Philosophy:**
+- **Use reveal.js framework** - Include CDN links for reveal.js CSS and JavaScript
+- **Horizontal slide navigation** - Arrow keys, click controls, or swipe to navigate
+- **Responsive design** - Presentations adapt to all screen sizes
+- **Custom theming** - Use CSS variables for brand colors while keeping reveal.js features
+- **Interactive features** - Enable progress bar, slide numbers, overview mode, and keyboard nav
+- **Smooth transitions** - Configure slide and background transitions
 - **Semantic HTML** - Proper heading hierarchy and accessibility
 
 **Content Guidelines:**
 - Prioritize clarity over cleverness
 - When in doubt, use fewer words
-- Test on mobile devices (the most important viewport)
-- Ensure all content is readable without zooming
+- Test on different screen sizes (mobile, tablet, desktop)
+- Use reveal.js features like overview mode (ESC key) for navigation
 
 **The Result:**
-Self-contained, accessible, mobile-first presentations that work offline and look beautiful on all devices - from 4" phones to 27" monitors. This is the Gamma AI advantage.
+Professional, interactive presentations with smooth transitions that work beautifully on all devices and provide a polished presentation experience.
 
 ## Workflow
 
@@ -849,10 +848,11 @@ Adjust content based on audience:
 
 ### Export Formats
 
-The primary output is Gamma AI-style HTML with vertical scrolling:
-- **Gamma HTML** (Primary): Vertical scroll, responsive cards, self-contained file
-- **Print/PDF Export**: Presentations can be printed or saved as PDF using browser print function
+The primary output is reveal.js HTML presentations:
+- **Reveal.js HTML** (Primary): Horizontal slides, smooth transitions, interactive features
+- **Print/PDF Export**: Presentations can be printed or saved as PDF using browser print function (reveal.js includes print styles)
 - **Accessibility**: Screen reader compatible with semantic HTML and ARIA labels
+- **Speaker View**: Use reveal.js speaker notes feature (press 'S' key) for presenter mode
 
 ## Troubleshooting
 
