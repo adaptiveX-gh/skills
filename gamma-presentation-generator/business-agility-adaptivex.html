@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Agility: Thriving in a Dynamic World</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/black.css">
+
+    <!-- Google Fonts for AdaptiveX theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* AdaptiveX Theme Variables */
+        :root {
+            --primary-color: #403c8b;
+            --secondary-color: #322f6e;
+            --accent-color: #5a56b8;
+            --text-primary: #1A1F36;
+            --text-secondary: #4E5D78;
+            --bg-gradient-start: #F8F7FC;
+            --bg-gradient-end: #EFEDF7;
+            --card-bg: #FFFFFF;
+            --font-family: 'Lexend Deca', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --logo-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50"><defs><linearGradient id="adaptivegrad" x1="0%25" y1="0%25" x2="100%25" y2="0%25"><stop offset="0%25" style="stop-color:%23403c8b;stop-opacity:1"/><stop offset="100%25" style="stop-color:%235a56b8;stop-opacity:1"/></linearGradient></defs><rect fill="url(%23adaptivegrad)" width="200" height="50" rx="8"/><path d="M 20 15 L 30 25 L 20 35 L 25 35 L 35 25 L 25 15 Z" fill="white" opacity="0.95"/><path d="M 30 15 L 40 25 L 30 35" fill="none" stroke="white" stroke-width="2.5" opacity="0.7"/><text x="50" y="33" font-family="Lexend Deca,sans-serif" font-size="20" font-weight="700" fill="white" letter-spacing="0.5">adaptiveX</text></svg>');
+        }
+
+        /* Override reveal.js styles with AdaptiveX theme */
+        .reveal {
+            font-family: var(--font-family);
+        }
+
+        .reveal .slides {
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+        }
+
+        .reveal h1 {
+            color: var(--primary-color);
+            font-weight: 800;
+            text-transform: none;
+        }
+
+        .reveal h2 {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: none;
+        }
+
+        .reveal h3 {
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-transform: none;
+        }
+
+        .reveal p, .reveal li {
+            color: var(--text-secondary);
+        }
+
+        .reveal strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .reveal .slide-background {
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+        }
+
+        /* Title slide styles */
+        .title-slide {
+            text-align: center;
+        }
+
+        .brand-logo {
+            width: 200px;
+            height: 50px;
+            margin: 0 auto 2rem;
+            background-image: var(--logo-url);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-weight: 400;
+        }
+
+        .course-meta {
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Content slide styles */
+        .reveal .slides section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(64, 60, 139, 0.15);
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .reveal .slides section.title-slide {
+            padding: 3rem;
+        }
+
+        .header-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            margin: -2rem -2rem 1.5rem -2rem;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .banner-logo {
+            width: 48px;
+            height: 48px;
+            background-image: var(--logo-url);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: brightness(0) invert(1);
+        }
+
+        .header-banner h2 {
+            margin: 0;
+            color: white !important;
+        }
+
+        /* Feature grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-box {
+            background: var(--bg-gradient-start);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-box h3 {
+            margin-top: 0;
+            color: var(--primary-color) !important;
+            font-size: 1.2rem;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .comparison-box {
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .comparison-box.traditional {
+            background: #FFE8E8;
+            border-left: 4px solid #E74C3C;
+        }
+
+        .comparison-box.agile {
+            background: #E8F8F5;
+            border-left: 4px solid #27AE60;
+        }
+
+        /* Center content */
+        .center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        /* Lists */
+        .reveal ul {
+            text-align: left;
+        }
+
+        .reveal ul li {
+            margin: 0.8rem 0;
+            line-height: 1.6;
+        }
+
+        .reveal ol li {
+            margin: 0.8rem 0;
+            line-height: 1.6;
+        }
+
+        /* Accent color for emphasis */
+        .accent {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* Checkmarks and X marks */
+        .checkmark {
+            color: #27AE60;
+            font-weight: 700;
+        }
+
+        .xmark {
+            color: #E74C3C;
+            font-weight: 700;
+        }
+
+        /* Metric boxes */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .metric-box {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Blockquote */
+        .reveal blockquote {
+            background: var(--bg-gradient-start);
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin: 1.5rem 0;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .reveal .slides section {
+                padding: 1.5rem;
+            }
+
+            .header-banner {
+                margin: -1.5rem -1.5rem 1rem -1.5rem;
+                padding: 1rem;
+            }
+
+            .feature-grid,
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-box h3 {
+                font-size: 1rem;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- TITLE SLIDE -->
+            <section class="title-slide">
+                <div class="brand-logo"></div>
+                <h1>Business Agility</h1>
+                <p class="subtitle">Thriving in a Dynamic World</p>
+                <p class="course-meta">Duration: 45 minutes | Level: Intermediate</p>
+            </section>
+
+            <!-- LEARNING OBJECTIVES -->
+            <section>
+                <div class="header-banner">
+                    <div class="banner-logo"></div>
+                    <h2>Learning Objectives</h2>
+                </div>
+                <p>By the end of this session, you will be able to:</p>
+                <ol>
+                    <li><strong>Understand</strong> what business agility is and why it matters</li>
+                    <li><strong>Identify</strong> the core principles of agile organizations</li>
+                    <li><strong>Apply</strong> practical frameworks to increase organizational agility</li>
+                    <li><strong>Recognize</strong> common challenges and how to overcome them</li>
+                </ol>
+            </section>
+
+            <!-- WHAT IS BUSINESS AGILITY -->
+            <section>
+                <h2>What is Business Agility?</h2>
+                <blockquote>
+                    Business agility is the ability of an organization to adapt quickly to market changes, respond rapidly to customer demands, and capitalize on opportunities for competitive advantage.
+                </blockquote>
+                <h3>Key Characteristics</h3>
+                <ul>
+                    <li><strong>Flexibility</strong>: Quickly pivot strategies and operations</li>
+                    <li><strong>Speed</strong>: Rapid decision-making and execution</li>
+                    <li><strong>Innovation</strong>: Continuous learning and experimentation</li>
+                    <li><strong>Resilience</strong>: Bounce back from setbacks and disruptions</li>
+                </ul>
+            </section>
+
+            <!-- WHY IT MATTERS -->
+            <section>
+                <div class="header-banner">
+                    <div class="banner-logo"></div>
+                    <h2>Why Business Agility Matters</h2>
+                </div>
+                <h3>The Business Case</h3>
+                <div class="metrics">
+                    <div class="metric-box">
+                        <span class="metric-value">3x</span>
+                        <span class="metric-label">Faster time to market</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-value">70%</span>
+                        <span class="metric-label">Improved customer satisfaction</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-value">2.5x</span>
+                        <span class="metric-label">Higher revenue growth</span>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem;"><em>Source: McKinsey & Company, 2023</em></p>
+            </section>
+
+            <!-- THE CHANGING BUSINESS LANDSCAPE -->
+            <section>
+                <h2>The Changing Business Landscape</h2>
+                <h3>Why Traditional Models Are Struggling</h3>
+                <ul>
+                    <li><strong>Digital Disruption</strong>: New competitors emerge overnight</li>
+                    <li><strong>Customer Expectations</strong>: Demand for instant, personalized experiences</li>
+                    <li><strong>Market Volatility</strong>: Economic uncertainty and rapid shifts</li>
+                    <li><strong>Technological Change</strong>: AI, automation, and innovation accelerating</li>
+                    <li><strong>Talent Dynamics</strong>: Remote work and changing workforce priorities</li>
+                </ul>
+            </section>
+
+            <!-- CORE PRINCIPLES -->
+            <section>
+                <div class="header-banner">
+                    <div class="banner-logo"></div>
+                    <h2>Core Principles of Business Agility</h2>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-box">
+                        <span class="feature-icon">👥</span>
+                        <h3>Customer Centricity</h3>
+                        <p>Focus on delivering value to customers through continuous feedback and iteration.</p>
+                    </div>
+                    <div class="feature-box">
+                        <span class="feature-icon">🔄</span>
+                        <h3>Iterative Progress</h3>
+                        <p>Break work into small increments with regular delivery and adjustment.</p>
+                    </div>
+                    <div class="feature-box">
+                        <span class="feature-icon">🤝</span>
+                        <h3>Cross-Functional Teams</h3>
+                        <p>Empower autonomous teams with diverse skills to own outcomes.</p>
+                    </div>
+                    <div class="feature-box">
+                        <span class="feature-icon">📊</span>
+                        <h3>Data-Driven Decisions</h3>
+                        <p>Use metrics and insights to guide strategy and validate assumptions.</p>
+                    </div>
+                    <div class="feature-box">
+                        <span class="feature-icon">🚀</span>
+                        <h3>Continuous Learning</h3>
+                        <p>Embrace failure as learning and foster a culture of experimentation.</p>
+                    </div>
+                    <div class="feature-box">
+                        <span class="feature-icon">⚡</span>
+                        <h3>Speed & Responsiveness</h3>
+                        <p>Reduce bureaucracy and enable fast decision-making at all levels.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRADITIONAL VS AGILE -->
+            <section>
+                <h2>Traditional vs Agile Organizations</h2>
+                <div class="two-column">
+                    <div class="comparison-box traditional">
+                        <h3><span class="xmark">✗</span> Traditional</h3>
+                        <ul>
+                            <li>Hierarchical structure</li>
+                            <li>Annual planning cycles</li>
+                            <li>Siloed departments</li>
+                            <li>Command and control</li>
+                            <li>Risk aversion</li>
+                            <li>Output focused</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box agile">
+                        <h3><span class="checkmark">✓</span> Agile</h3>
+                        <ul>
+                            <li>Flat, networked teams</li>
+                            <li>Continuous planning</li>
+                            <li>Cross-functional collaboration</li>
+                            <li>Distributed decision-making</li>
+                            <li>Calculated experimentation</li>
+                            <li>Outcome focused</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KEY FRAMEWORKS -->
+            <section>
+                <div class="header-banner">
+                    <div class="banner-logo"></div>
+                    <h2>Key Agile Frameworks</h2>
+                </div>
+                <h3>Popular Approaches for Business Agility</h3>
+                <ul>
+                    <li><strong>Scrum</strong>: Iterative framework with sprints, standups, and retrospectives</li>
+                    <li><strong>Kanban</strong>: Visual workflow management with continuous delivery</li>
+                    <li><strong>SAFe (Scaled Agile Framework)</strong>: Enterprise-level agile coordination</li>
+                    <li><strong>OKRs (Objectives & Key Results)</strong>: Goal-setting for alignment and focus</li>
+                    <li><strong>Lean Startup</strong>: Build-Measure-Learn cycle for innovation</li>
+                </ul>
+            </section>
+
+            <!-- CASE STUDY -->
+            <section>
+                <h2>Case Study: Retail Transformation</h2>
+                <h3>The Challenge</h3>
+                <p>A traditional retailer faced declining sales and struggled to compete with e-commerce giants. Long product development cycles (12-18 months) prevented rapid response to trends.</p>
+
+                <h3>The Agile Approach</h3>
+                <ul>
+                    <li>Reorganized into cross-functional product teams</li>
+                    <li>Implemented 2-week sprints with customer testing</li>
+                    <li>Created a culture of experimentation and learning</li>
+                    <li>Adopted data-driven decision making</li>
+                </ul>
+
+                <h3>The Results</h3>
+                <ul>
+                    <li><span class="accent">6 months</span> → time to market reduced by 67%</li>
+                    <li><span class="accent">40% increase</span> in customer satisfaction scores</li>
+                    <li><span class="accent">$50M</span> in new revenue from faster innovation</li>
+                </ul>
+            </section>
+
+            <!-- IMPLEMENTATION ROADMAP -->
+            <section>
+                <div class="header-banner">
+                    <div class="banner-logo"></div>
+                    <h2>Implementation Roadmap</h2>
+                </div>
+                <ol class="steps">
+                    <li><strong>Assess Current State</strong> - Evaluate processes, culture, and readiness for change</li>
+                    <li><strong>Define Vision & Goals</strong> - Clarify what business agility means for your organization</li>
+                    <li><strong>Start with Pilot Teams</strong> - Choose 2-3 teams to experiment with agile practices</li>
+                    <li><strong>Build Capabilities</strong> - Train teams on frameworks, tools, and mindset shifts</li>
+                    <li><strong>Scale Gradually</strong> - Expand successful practices across the organization</li>
+                    <li><strong>Measure & Adapt</strong> - Track metrics and continuously improve</li>
+                </ol>
+            </section>
+
+            <!-- COMMON CHALLENGES -->
+            <section>
+                <h2>Common Challenges</h2>
+                <h3>Obstacles to Business Agility</h3>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4><span class="xmark">✗</span> Challenge: Resistance to Change</h4>
+                    <p><strong>Solution:</strong> Start with early adopters, demonstrate quick wins, and communicate the "why" consistently.</p>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4><span class="xmark">✗</span> Challenge: Lack of Leadership Buy-In</h4>
+                    <p><strong>Solution:</strong> Present business case with data, involve leaders in pilot programs, show ROI.</p>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <h4><span class="xmark">✗</span> Challenge: Siloed Departments</h4>
+                    <p><strong>Solution:</strong> Create cross-functional teams, shared goals, and collaborative spaces.</p>
+                </div>
+            </section>
+
+            <!-- MEASURING SUCCESS -->
+            <section>
+                <div class="header-banner">
+                    <div class="banner-logo"></div>
+                    <h2>Measuring Agility Success</h2>
+                </div>
+                <h3>Key Metrics to Track</h3>
+                <ul>
+                    <li><strong>Time to Market</strong>: How quickly can you deliver new products/features?</li>
+                    <li><strong>Customer Satisfaction (NPS)</strong>: Are customers happier with your offerings?</li>
+                    <li><strong>Employee Engagement</strong>: Are teams empowered and motivated?</li>
+                    <li><strong>Innovation Rate</strong>: How many experiments are you running?</li>
+                    <li><strong>Adaptability Index</strong>: How fast can you pivot in response to change?</li>
+                    <li><strong>Revenue Growth</strong>: Is agility translating to business results?</li>
+                </ul>
+            </section>
+
+            <!-- BEST PRACTICES -->
+            <section>
+                <h2>Best Practices</h2>
+                <h3>Do's <span class="checkmark">✓</span></h3>
+                <ul>
+                    <li><strong>Start Small</strong>: Begin with pilots before scaling organization-wide</li>
+                    <li><strong>Empower Teams</strong>: Give autonomy and trust to make decisions</li>
+                    <li><strong>Celebrate Learning</strong>: Reward experimentation, even when it fails</li>
+                    <li><strong>Focus on Outcomes</strong>: Measure value delivered, not hours worked</li>
+                </ul>
+
+                <h3>Don'ts <span class="xmark">✗</span></h3>
+                <ul>
+                    <li><strong>Don't Rush</strong>: Transformation takes time; be patient and persistent</li>
+                    <li><strong>Don't Copy-Paste</strong>: Adapt frameworks to your unique context</li>
+                    <li><strong>Don't Ignore Culture</strong>: Technical changes without mindset shifts will fail</li>
+                </ul>
+            </section>
+
+            <!-- RESOURCES -->
+            <section>
+                <div class="header-banner">
+                    <div class="banner-logo"></div>
+                    <h2>Tools & Resources</h2>
+                </div>
+                <h3>Essential Reading</h3>
+                <ul>
+                    <li>📚 <strong>"Doing Agile Right"</strong> by Darrell Rigby, Sarah Elk, Steve Berez</li>
+                    <li>📚 <strong>"Team of Teams"</strong> by General Stanley McChrystal</li>
+                    <li>📚 <strong>"Accelerate"</strong> by Nicole Forsgren, Jez Humble, Gene Kim</li>
+                </ul>
+
+                <h3>Online Resources</h3>
+                <ul>
+                    <li>🌐 Business Agility Institute: <em>www.businessagility.institute</em></li>
+                    <li>🎥 Harvard Business Review: Agile at Scale series</li>
+                    <li>📝 McKinsey Insights: Organizational Agility articles</li>
+                </ul>
+            </section>
+
+            <!-- SUMMARY -->
+            <section>
+                <h2>Summary</h2>
+                <h3>Key Takeaways</h3>
+                <ol>
+                    <li><strong>Business Agility</strong> is the ability to adapt quickly to change and capitalize on opportunities</li>
+                    <li><strong>Core Principles</strong> include customer centricity, iterative progress, cross-functional teams, and data-driven decisions</li>
+                    <li><strong>Implementation</strong> requires cultural transformation, not just process changes</li>
+                    <li><strong>Success</strong> is measured through improved time to market, customer satisfaction, and revenue growth</li>
+                </ol>
+
+                <h3>You Can Now</h3>
+                <ul>
+                    <li><span class="checkmark">✓</span> Explain business agility to stakeholders</li>
+                    <li><span class="checkmark">✓</span> Identify opportunities for agility in your organization</li>
+                    <li><span class="checkmark">✓</span> Apply frameworks like Scrum, Kanban, or OKRs</li>
+                    <li><span class="checkmark">✓</span> Navigate common challenges with proven solutions</li>
+                </ul>
+            </section>
+
+            <!-- CLOSING SLIDE -->
+            <section class="center">
+                <h1>Thank You!</h1>
+                <h3>Questions?</h3>
+                <p style="margin-top: 2rem;">
+                    <strong>Next Steps:</strong><br>
+                    Start a pilot agile team in your organization this month
+                </p>
+                <p style="margin-top: 1rem; color: var(--accent-color);">
+                    Press <strong>ESC</strong> for slide overview | <strong>→</strong> and <strong>←</strong> to navigate
+                </p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            // The "normal" size of the presentation, aspect ratio will be preserved
+            // when the presentation is scaled to fit different resolutions
+            width: 1280,
+            height: 720,
+
+            // Factor of the display size that should remain empty around the content
+            margin: 0.04,
+
+            // Bounds for smallest/largest possible scale to apply to content
+            minScale: 0.2,
+            maxScale: 2.0,
+
+            // Display controls in the bottom right corner
+            controls: true,
+
+            // Display a presentation progress bar
+            progress: true,
+
+            // Display the page number of the current slide
+            slideNumber: true,
+
+            // Push each slide change to the browser history
+            history: true,
+
+            // Enable keyboard shortcuts for navigation
+            keyboard: true,
+
+            // Enable the slide overview mode
+            overview: true,
+
+            // Vertical centering of slides
+            center: true,
+
+            // Enables touch navigation on devices with touch input
+            touch: true,
+
+            // Loop the presentation
+            loop: false,
+
+            // Change the presentation direction to be RTL
+            rtl: false,
+
+            // Turns fragments on and off globally
+            fragments: true,
+
+            // Flags if the presentation is running in an embedded mode
+            embedded: false,
+
+            // Number of milliseconds between automatically proceeding to the
+            // next slide, disabled when set to 0
+            autoSlide: 0,
+
+            // Stop auto-sliding after user input
+            autoSlideStoppable: true,
+
+            // Enable slide navigation via mouse wheel
+            mouseWheel: false,
+
+            // Hides the address bar on mobile devices
+            hideAddressBar: true,
+
+            // Opens links in an iframe preview overlay
+            previewLinks: false,
+
+            // Transition style
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Transition speed
+            transitionSpeed: 'default', // default/fast/slow
+
+            // Transition style for full page slide backgrounds
+            backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        });
+    </script>
+</body>
+</html>
