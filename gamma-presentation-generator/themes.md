@@ -8,6 +8,19 @@ The theming system allows you to apply consistent branding (colors, typography, 
 
 All theme values are stored in CSS custom properties in the `:root` selector. To apply a theme, simply replace the values in the `:root` block or add a theme-specific class to the `<body>` tag.
 
+## Theme Files
+
+All theme definitions are available in `styles/themes.css`. This file contains:
+- 7 pre-built themes (Default, Bank, AdaptiveX, Ocean, Sunset, Forest, Minimal Dark)
+- Complete CSS custom properties for each theme
+- Logo placeholders and examples
+
+To use a theme:
+1. Open `styles/themes.css`
+2. Find the `.theme-{name}` class you want
+3. Copy the :root variables from that theme
+4. Paste into your presentation's `<style>` section
+
 ## Theme Structure
 
 Each theme consists of:
@@ -23,246 +36,72 @@ Each theme consists of:
 
 The standard Gamma AI color scheme with purple/blue gradients.
 
-```css
-:root {
-    /* Colors */
-    --gamma-primary: #5E5ADB;
-    --gamma-secondary: #4A90E2;
-    --gamma-accent: #FF6B6B;
-    --text-primary: #1A1F36;
-    --text-secondary: #4E5D78;
-    --bg-gradient-start: #F8F9FD;
-    --bg-gradient-end: #E8ECF4;
-    --card-bg: #FFFFFF;
+**Colors**: Purple (#5E5ADB), Blue (#4A90E2), Red accent (#FF6B6B)
+**Style**: Modern, rounded (20px radius)
+**Best For**: General presentations, tech talks, creative content
 
-    /* Typography */
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-base: max(16px, min(2vw, 18px));
-    --font-h1: max(32px, min(6vw, 48px));
-    --font-h2: max(24px, min(4vw, 36px));
-    --font-h3: max(18px, min(3vw, 24px));
-
-    /* Spacing */
-    --max-width: 1100px;
-    --card-radius: 20px;
-    --card-padding: 56px;
-    --card-padding-mobile: 32px 24px;
-
-    /* Branding */
-    --logo-url: none;
-    --brand-name: '';
-}
-```
+See `styles/themes.css` (`.theme-default`) for complete theme definition.
 
 ### 2. Bank Theme
 
 Professional corporate theme for financial institutions. Clean, trustworthy design with conservative colors.
 
-```css
-:root {
-    /* Colors */
-    --gamma-primary: #383B3E;      /* Dark Corporate Gray */
-    --gamma-secondary: #2A2D30;    /* Deeper Gray */
-    --gamma-accent: #C41F3E;       /* Professional Red */
-    --text-primary: #1A1F36;
-    --text-secondary: #4E5D78;
-    --bg-gradient-start: #F5F5F5;
-    --bg-gradient-end: #E8E8E8;
-    --card-bg: #FFFFFF;
+**Colors**: Dark Gray (#383B3E), Corporate Red (#C41F3E)
+**Style**: Corporate, sharp (12px radius)
+**Best For**: Financial presentations, corporate reports, professional decks
 
-    /* Typography */
-    --font-family: 'Whitney', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-base: max(16px, min(2vw, 18px));
-    --font-h1: max(32px, min(6vw, 48px));
-    --font-h2: max(24px, min(4vw, 36px));
-    --font-h3: max(18px, min(3vw, 24px));
-
-    /* Spacing */
-    --max-width: 1100px;
-    --card-radius: 12px;           /* More corporate, less rounded */
-    --card-padding: 56px;
-    --card-padding-mobile: 32px 24px;
-
-    /* Branding */
-    --logo-url: none;              /* Add your bank's logo URL */
-    --brand-name: '';
-}
-```
+See `styles/themes.css` (`.theme-bank`) for complete theme definition.
 
 ### 3. AdaptiveX Theme
 
 Modern, innovative theme with deep purple accent. Perfect for design, innovation, and business transformation presentations.
 
-```css
-:root {
-    /* Colors */
-    --gamma-primary: #403c8b;      /* Gigas Purple - AdaptiveX brand color */
-    --gamma-secondary: #322f6e;    /* Darker purple variant */
-    --gamma-accent: #5a56b8;       /* Lighter purple accent */
-    --text-primary: #1A1F36;
-    --text-secondary: #4E5D78;
-    --bg-gradient-start: #F8F7FC;
-    --bg-gradient-end: #EFEDF7;
-    --card-bg: #FFFFFF;
+**Colors**: Gigas Purple (#403c8b), Light Purple accent (#5a56b8)
+**Typography**: Lexend Deca font family
+**Style**: Modern, rounded (16px radius)
+**Best For**: Design sprints, innovation workshops, transformation presentations
 
-    /* Typography */
-    --font-family: 'Lexend Deca', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-base: max(16px, min(2vw, 18px));
-    --font-h1: max(32px, min(6vw, 48px));
-    --font-h2: max(24px, min(4vw, 36px));
-    --font-h3: max(18px, min(3vw, 24px));
-
-    /* Spacing */
-    --max-width: 1100px;
-    --card-radius: 16px;           /* Modern, rounded */
-    --card-padding: 56px;
-    --card-padding-mobile: 32px 24px;
-
-    /* Branding */
-    --logo-url: none;              /* Add AdaptiveX logo data URI */
-    --brand-name: 'AdaptiveX';
-}
-```
+See `styles/themes.css` (`.theme-adaptivex`) for complete theme definition.
 
 ### 4. Ocean Theme
 
 Fresh, blue-green theme perfect for nature/environmental presentations.
 
-```css
-:root {
-    /* Colors */
-    --gamma-primary: #006994;      /* Deep ocean blue */
-    --gamma-secondary: #0099CC;    /* Bright ocean */
-    --gamma-accent: #00C9A7;       /* Turquoise accent */
-    --text-primary: #1A1F36;
-    --text-secondary: #4E5D78;
-    --bg-gradient-start: #E0F7FA;
-    --bg-gradient-end: #B2EBF2;
-    --card-bg: #FFFFFF;
+**Colors**: Ocean Blue (#006994), Turquoise (#00C9A7)
+**Style**: Fresh, rounded (20px radius)
+**Best For**: Environmental topics, marine content, sustainability
 
-    /* Typography */
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-base: max(16px, min(2vw, 18px));
-    --font-h1: max(32px, min(6vw, 48px));
-    --font-h2: max(24px, min(4vw, 36px));
-    --font-h3: max(18px, min(3vw, 24px));
+See `styles/themes.css` (`.theme-ocean`) for complete theme definition.
 
-    /* Spacing */
-    --max-width: 1100px;
-    --card-radius: 20px;
-    --card-padding: 56px;
-    --card-padding-mobile: 32px 24px;
-
-    /* Branding */
-    --logo-url: none;
-    --brand-name: '';
-}
-```
-
-### 4. Sunset Theme
+### 5. Sunset Theme
 
 Warm, energetic theme with orange/red gradients.
 
-```css
-:root {
-    /* Colors */
-    --gamma-primary: #E74C3C;      /* Sunset red */
-    --gamma-secondary: #F39C12;    /* Golden orange */
-    --gamma-accent: #FF6B6B;       /* Coral accent */
-    --text-primary: #2C3E50;
-    --text-secondary: #5D6D7E;
-    --bg-gradient-start: #FFF5E6;
-    --bg-gradient-end: #FFE8CC;
-    --card-bg: #FFFFFF;
+**Colors**: Sunset Red (#E74C3C), Golden Orange (#F39C12)
+**Style**: Warm, energetic (20px radius)
+**Best For**: Creative presentations, energetic talks, warm topics
 
-    /* Typography */
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-base: max(16px, min(2vw, 18px));
-    --font-h1: max(32px, min(6vw, 48px));
-    --font-h2: max(24px, min(4vw, 36px));
-    --font-h3: max(18px, min(3vw, 24px));
+See `styles/themes.css` (`.theme-sunset`) for complete theme definition.
 
-    /* Spacing */
-    --max-width: 1100px;
-    --card-radius: 20px;
-    --card-padding: 56px;
-    --card-padding-mobile: 32px 24px;
-
-    /* Branding */
-    --logo-url: none;
-    --brand-name: '';
-}
-```
-
-### 5. Forest Theme
+### 6. Forest Theme
 
 Natural, earthy theme with greens and browns.
 
-```css
-:root {
-    /* Colors */
-    --gamma-primary: #2E7D32;      /* Forest green */
-    --gamma-secondary: #558B2F;    /* Light green */
-    --gamma-accent: #8BC34A;       /* Fresh green accent */
-    --text-primary: #1B5E20;
-    --text-secondary: #4E5D78;
-    --bg-gradient-start: #F1F8E9;
-    --bg-gradient-end: #DCEDC8;
-    --card-bg: #FFFFFF;
+**Colors**: Forest Green (#2E7D32), Fresh Green (#8BC34A)
+**Style**: Natural, rounded (20px radius)
+**Best For**: Eco-friendly content, nature topics, sustainability
 
-    /* Typography */
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-base: max(16px, min(2vw, 18px));
-    --font-h1: max(32px, min(6vw, 48px));
-    --font-h2: max(24px, min(4vw, 36px));
-    --font-h3: max(18px, min(3vw, 24px));
+See `styles/themes.css` (`.theme-forest`) for complete theme definition.
 
-    /* Spacing */
-    --max-width: 1100px;
-    --card-radius: 20px;
-    --card-padding: 56px;
-    --card-padding-mobile: 32px 24px;
-
-    /* Branding */
-    --logo-url: none;
-    --brand-name: '';
-}
-```
-
-### 6. Minimal Dark Theme
+### 7. Minimal Dark Theme
 
 Sleek, modern dark theme for tech presentations.
 
-```css
-:root {
-    /* Colors */
-    --gamma-primary: #BB86FC;      /* Purple accent */
-    --gamma-secondary: #03DAC6;    /* Teal accent */
-    --gamma-accent: #CF6679;       /* Pink accent */
-    --text-primary: #E1E1E1;
-    --text-secondary: #B0B0B0;
-    --bg-gradient-start: #121212;
-    --bg-gradient-end: #1E1E1E;
-    --card-bg: #1E1E1E;
+**Colors**: Purple (#BB86FC), Teal (#03DAC6), Pink accent (#CF6679)
+**Style**: Dark, sharp (8px radius)
+**Best For**: Tech presentations, developer talks, modern content
 
-    /* Typography */
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-base: max(16px, min(2vw, 18px));
-    --font-h1: max(32px, min(6vw, 48px));
-    --font-h2: max(24px, min(4vw, 36px));
-    --font-h3: max(18px, min(3vw, 24px));
-
-    /* Spacing */
-    --max-width: 1100px;
-    --card-radius: 8px;            /* Sharp, modern edges */
-    --card-padding: 56px;
-    --card-padding-mobile: 32px 24px;
-
-    /* Branding */
-    --logo-url: none;
-    --brand-name: '';
-}
-```
+See `styles/themes.css` (`.theme-dark`) for complete theme definition.
 
 ## How to Apply a Theme
 
@@ -360,84 +199,15 @@ For themes with logos, add this to your title slide:
 
 **Required CSS for Header Banners:**
 
-```css
-/* Header Banner - Corporate style with logo */
-.header-banner {
-    position: relative;
-    background: linear-gradient(135deg, var(--gamma-accent), #D32F4F);
-    margin: -56px -56px 32px -56px;
-    padding: 48px 56px 80px 56px;
-    min-height: 120px;
-}
+All header banner styles are included in `styles/core.css` (lines 271-341). Copy the entire core.css file into your `<style>` section to use header banners.
 
-@media (max-width: 768px) {
-    .header-banner {
-        margin: -32px -24px 24px -24px;
-        padding: 32px 24px 60px 24px;
-        min-height: 100px;
-    }
-}
-
-/* Logo in header banner - right aligned */
-.header-banner .banner-logo {
-    position: absolute;
-    top: 24px;
-    right: 56px;
-    width: 120px;
-    height: 40px;
-    background-image: var(--logo-url);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right center;
-    opacity: 0.95;
-}
-
-@media (max-width: 768px) {
-    .header-banner .banner-logo {
-        right: 24px;
-        width: 100px;
-        height: 32px;
-    }
-}
-
-/* Title overlay on banner */
-.header-banner h2 {
-    color: #FFFFFF;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    margin-bottom: 0;
-    position: relative;
-    z-index: 1;
-    background: none;
-    -webkit-text-fill-color: #FFFFFF;
-}
-
-/* Pattern overlay for visual interest */
-.header-banner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(255,255,255,0.05) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.05) 75%),
-        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.05) 75%);
-    background-size: 60px 60px;
-    opacity: 0.3;
-}
-
-/* Variant: Simple header bar (no pattern) */
-.header-banner.simple::before {
-    display: none;
-}
-
-/* Variant: Dark header */
-.header-banner.dark {
-    background: linear-gradient(135deg, var(--gamma-primary), var(--gamma-secondary));
-}
-```
+**Key features of header banner CSS:**
+- Uses theme accent color for gradient background
+- Logo positioned on right side
+- White text overlay with shadow
+- Pattern overlay for visual interest (can be disabled with `.simple` class)
+- Fully responsive for mobile devices
+- Dark variant available with `.dark` class
 
 **When to Use Header Banners:**
 - ✅ Content slides with data, lists, or information
@@ -447,27 +217,15 @@ For themes with logos, add this to your title slide:
 - ❌ Slides with very little content
 - ❌ Image-focused slides where banner would compete
 
-**For centered logo on title slides, add this CSS:**
+**Required CSS for Centered Logo:**
 
-```css
-.brand-logo {
-    width: 200px;
-    height: 60px;
-    margin: 0 auto 32px;
-    background-image: var(--logo-url);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
+The `.brand-logo` styles are included in `styles/core.css` (lines 96-120). Copy the entire core.css file into your `<style>` section to use centered logos.
 
-@media (max-width: 768px) {
-    .brand-logo {
-        width: 150px;
-        height: 45px;
-        margin-bottom: 24px;
-    }
-}
-```
+**Key features:**
+- Centered with auto margins
+- 200px wide on desktop, 150px on mobile
+- Responsive sizing for all devices
+- Uses `--logo-url` theme variable
 
 ### Method 3: Create Custom Theme
 
@@ -504,31 +262,16 @@ Example custom theme:
 
 ## Theme Usage in CSS
 
-The theme variables are used throughout the presentation CSS:
+Theme variables are automatically applied throughout the presentation CSS in `styles/core.css`. The core styles use CSS custom properties (variables) to apply your theme consistently across:
 
-```css
-/* Headings use gradient with theme colors */
-h1 {
-    background: linear-gradient(135deg, var(--gamma-primary), var(--gamma-accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+- **Headings**: Gradient text using `--gamma-primary` and `--gamma-accent`
+- **Accent bars**: Top border on cards using theme colors
+- **Lists**: Bullet points and numbers styled with `--gamma-primary`
+- **Background**: Body gradient using `--bg-gradient-start` and `--bg-gradient-end`
+- **Typography**: Font families from `--font-family`
+- **Spacing**: Card radius and padding from theme variables
 
-/* Accent bar uses theme colors */
-.gamma-card::before {
-    background: linear-gradient(90deg, var(--gamma-primary), var(--gamma-accent));
-}
-
-/* Lists use theme primary color */
-ul li::before {
-    color: var(--gamma-primary);
-}
-
-/* Background uses theme gradient */
-body {
-    background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-}
-```
+See `styles/core.css` for complete implementation details.
 
 ## Best Practices
 

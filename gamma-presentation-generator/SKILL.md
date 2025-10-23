@@ -285,435 +285,68 @@ When appropriate, suggest images by adding:
 
 ### 7. Output Format
 
-Generate a vertical-scrolling HTML document with Gamma AI-style cards. Always provide:
+Generate a vertical-scrolling HTML document using the template structure. Always provide:
 
 1. **Self-contained HTML file** (no external dependencies)
 2. **Vertical scrolling navigation** (not horizontal slides)
 3. **Mobile-responsive cards** (that grow to fit content)
 4. **Minimum readable font sizes** (never shrink below 16px)
 
-#### HTML Template Structure:
+#### Template Usage:
+
+Use `templates/template.html` as the base structure. Follow these steps:
+
+1. **Copy template.html**
+2. **Select theme** from `styles/themes.css` and paste :root variables
+3. **Copy core styles** from `styles/core.css` into the <style> section
+4. **Replace placeholders** ({{PRESENTATION_TITLE}}, {{SLIDE_TITLE}}, etc.) with actual content
+5. **Add/remove slides** as needed for the presentation length
+
+#### Quick Reference - File Locations:
+
+- **Template**: `gamma-presentation-generator/templates/template.html`
+- **Themes**: `gamma-presentation-generator/styles/themes.css`
+- **Core CSS**: `gamma-presentation-generator/styles/core.css`
+- **Documentation**: `gamma-presentation-generator/themes.md`
+
+#### Minimal HTML Structure:
+
+See `templates/template.html` for the complete structure. Key elements:
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Presentation Title]</title>
-    <style>
-        :root {
-            --gamma-primary: #5E5ADB;
-            --gamma-accent: #FF6B6B;
-            --text-primary: #1A1F36;
-            --text-secondary: #4E5D78;
-            --max-width: 1100px;
-            --card-radius: 20px;
-            --font-base: max(16px, min(2vw, 18px));
-            --font-h1: max(32px, min(6vw, 48px));
-            --font-h2: max(24px, min(4vw, 36px));
-        }
+<!-- 1. Define theme variables (copy from styles/themes.css) -->
+<style>
+    :root {
+        --gamma-primary: #403c8b;  /* Your brand color */
+        --gamma-accent: #5a56b8;    /* Accent color */
+        --logo-url: url('data:image/...');  /* Logo as data URI */
+        /* ... other theme variables ... */
+    }
+    /* 2. Include core.css styles here */
+</style>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(180deg, #F8F9FD 0%, #E8ECF4 100%);
-            background-attachment: fixed;
-            color: var(--text-primary);
-            line-height: 1.6;
-            padding: 60px 20px;
-        }
-
-        /* Progress Bar */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: rgba(94, 90, 219, 0.1);
-            z-index: 1000;
-        }
-
-        .scroll-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gamma-primary), var(--gamma-accent));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* Slides */
-        .slide {
-            margin-bottom: 80px;
-            scroll-margin-top: 20px;
-        }
-
-        /* Cards - THE KEY COMPONENT */
-        .gamma-card {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            background: white;
-            border-radius: var(--card-radius);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            overflow: hidden;
-            position: relative;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: slideIn 0.6s ease forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Colored accent bar */
-        .gamma-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gamma-primary), var(--gamma-accent));
-        }
-
-        .card-content {
-            padding: 56px;
-        }
-
-        /* CRITICAL: Mobile Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 40px 15px;
-            }
-
-            .slide {
-                margin-bottom: 50px;
-            }
-
-            /* THIS IS THE KEY INNOVATION */
-            .gamma-card {
-                min-height: auto !important; /* Cards grow naturally */
-                height: auto !important;
-            }
-
-            .card-content {
-                padding: 32px 24px;
-            }
-
-            /* Enforce minimum readable sizes */
-            h1 {
-                font-size: max(32px, 8vw) !important;
-            }
-            h2 {
-                font-size: max(24px, 6vw) !important;
-            }
-            p, li {
-                font-size: max(16px, 4vw) !important;
-                line-height: 1.6;
-            }
-        }
-
-        /* Typography */
-        h1 {
-            font-size: var(--font-h1);
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--gamma-primary), var(--gamma-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        h2 {
-            font-size: var(--font-h2);
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: var(--text-primary);
-        }
-
-        h3 {
-            font-size: max(18px, min(3vw, 24px));
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-        }
-
-        p {
-            font-size: var(--font-base);
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-        }
-
-        /* Lists */
-        ul, ol {
-            margin: 20px 0;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        li {
-            position: relative;
-            padding-left: 32px;
-            margin-bottom: 16px;
-            font-size: var(--font-base);
-            color: var(--text-secondary);
-        }
-
-        ul li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--gamma-primary);
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        ol {
-            counter-reset: item;
-            padding-left: 0;
-        }
-
-        ol li {
-            counter-increment: item;
-        }
-
-        ol li::before {
-            content: counter(item) ".";
-            position: absolute;
-            left: 0;
-            color: var(--gamma-primary);
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        /* Blockquotes */
-        blockquote {
-            background: linear-gradient(135deg, #F8F9FD, #E8ECF4);
-            border-left: 4px solid var(--gamma-primary);
-            padding: 24px 32px;
-            margin: 24px 0;
-            border-radius: 8px;
-            font-style: italic;
-            color: var(--text-primary);
-        }
-
-        /* Strong/Bold */
-        strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Center layout for title slides */
-        .center {
-            text-align: center;
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* Feature grids */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            margin: 30px 0;
-        }
-
-        @media (max-width: 640px) {
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .feature-box {
-            background: linear-gradient(135deg, #F8F9FD, #FFFFFF);
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid rgba(94,90,219,0.08);
-        }
-
-        .feature-box h3 {
-            margin-bottom: 12px;
-        }
-
-        /* Two column layout */
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 20px 0;
-        }
-
-        @media (max-width: 768px) {
-            .two-column {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-
-        /* Subtitle styling */
-        .subtitle {
-            font-size: max(18px, min(3vw, 22px));
-            color: var(--text-secondary);
-            margin-top: 12px;
-            font-weight: 400;
-        }
-    </style>
-</head>
-<body>
-    <div class="scroll-progress">
-        <div class="scroll-progress-bar"></div>
-    </div>
-
-    <main class="presentation">
-        <!-- Example: Title Slide -->
-        <section class="slide">
-            <div class="gamma-card">
-                <div class="card-content center">
-                    <h1>Presentation Title</h1>
-                    <p class="subtitle">Subtitle or tagline</p>
-                </div>
+<!-- 3. Add slide structure -->
+<main class="presentation">
+    <section class="slide">
+        <div class="gamma-card">
+            <div class="card-content">
+                <h2>Slide Title</h2>
+                <p>Content here...</p>
             </div>
-        </section>
+        </div>
+    </section>
+</main>
 
-        <!-- Example: Content Slide -->
-        <section class="slide">
-            <div class="gamma-card">
-                <div class="card-content">
-                    <h2>Section Title</h2>
-                    <h3>Subsection</h3>
-                    <p>Introduction paragraph explaining the concept.</p>
-                    <ul>
-                        <li>First key point</li>
-                        <li>Second key point</li>
-                        <li>Third key point</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Example: Feature Grid Slide -->
-        <section class="slide">
-            <div class="gamma-card">
-                <div class="card-content">
-                    <h2>Features</h2>
-                    <div class="feature-grid">
-                        <div class="feature-box">
-                            <h3>🚀 Feature One</h3>
-                            <p>Description of the first feature.</p>
-                        </div>
-                        <div class="feature-box">
-                            <h3>💡 Feature Two</h3>
-                            <p>Description of the second feature.</p>
-                        </div>
-                        <div class="feature-box">
-                            <h3>🎯 Feature Three</h3>
-                            <p>Description of the third feature.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Example: Two Column Slide -->
-        <section class="slide">
-            <div class="gamma-card">
-                <div class="card-content">
-                    <h2>Comparison</h2>
-                    <div class="two-column">
-                        <div>
-                            <h3>Column One</h3>
-                            <ul>
-                                <li>Point A</li>
-                                <li>Point B</li>
-                                <li>Point C</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3>Column Two</h3>
-                            <ul>
-                                <li>Point X</li>
-                                <li>Point Y</li>
-                                <li>Point Z</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Example: Quote/Blockquote Slide -->
-        <section class="slide">
-            <div class="gamma-card">
-                <div class="card-content">
-                    <h2>Key Insight</h2>
-                    <blockquote>
-                        "An impactful quote or important callout that emphasizes the main message."
-                    </blockquote>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <script>
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const scrollPercent = (window.scrollY /
-                (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
-        });
-
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.gamma-card').forEach(card => {
-            observer.observe(card);
-        });
-
-        // Optional: Keyboard navigation for vertical scrolling
-        document.addEventListener('keydown', (e) => {
-            const slides = document.querySelectorAll('.slide');
-            const currentSlide = Array.from(slides).findIndex(slide => {
-                const rect = slide.getBoundingClientRect();
-                return rect.top >= 0 && rect.top < window.innerHeight / 2;
-            });
-
-            if (e.key === 'ArrowDown' || e.key === ' ') {
-                e.preventDefault();
-                if (currentSlide < slides.length - 1) {
-                    slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
-                }
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (currentSlide > 0) {
-                    slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+<!-- 4. Add JavaScript for interactivity -->
+<script>
+    /* Copy JavaScript from template.html */
+</script>
 ```
+
+**For complete examples:** See the presentation files in the repository:
+- `niagara-falls-bank-theme.html`
+- `niagara-falls-adaptivex-theme.html`
+- `niagara-falls-gamma.html`
 
 ### 8. Integration with Other Skills
 
