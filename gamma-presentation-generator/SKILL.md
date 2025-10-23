@@ -1,21 +1,30 @@
 ---
 name: gamma-presentation-generator
-description: Content-first presentation generator that transforms ideas, documents, and outlines into well-structured, narrative-driven presentations optimized for Gamma and other formats. This skill should be used when users request presentation creation, slide generation, pitch deck building, or content conversion to presentation format.
+description: Content-first presentation generator that transforms ideas, documents, and outlines into Gamma AI-style vertical scrolling presentations. Generates self-contained HTML with mobile-responsive cards that grow to fit content. Includes comprehensive theming system with brand color support (uses Brandfetch for automatic brand extraction). No reveal.js or external dependencies. This skill should be used when users request presentation creation, slide generation, pitch deck building, or content conversion to presentation format.
 ---
 
 # Gamma Presentation Generator
 
 ## Purpose
 
-Transform ideas, outlines, documents, or natural language prompts into well-structured, narrative-driven presentations. This skill focuses on content intelligence and narrative structure rather than just formatting - helping users organize thoughts into compelling stories that work across devices and formats.
+Transform ideas, outlines, documents, or natural language prompts into Gamma AI-style vertical scrolling presentations. This skill generates self-contained HTML files with mobile-responsive cards that prioritize readability and accessibility. Unlike traditional slide-based presentations, Gamma presentations use vertical scrolling with cards that expand to fit content - ensuring perfect readability on all devices from phones to large displays.
 
 ## Core Philosophy
 
-**Content-First Approach**: The quality of a presentation depends on narrative structure, logical flow, and compelling content - not just visual design. This skill excels at:
+**Gamma AI Vertical Scrolling**: This skill generates presentations that embrace the Gamma AI philosophy - vertical scrolling with responsive cards that grow to fit content. Key principles:
+
+1. **Vertical Navigation**: Natural scrolling like a webpage, not horizontal slide clicking
+2. **Cards Grow on Mobile**: Content determines card height; text never shrinks below readable sizes (16px minimum)
+3. **Self-Contained HTML**: No external dependencies or CDN links; presentations work offline
+4. **Content-First Approach**: Narrative structure and compelling content over visual gimmicks
+5. **Progressive Enhancement**: Accessible core content enhanced with JavaScript features
+6. **Mobile-First Design**: Optimized for phones first, then tablets and desktops
+
+**This skill excels at:**
 
 1. **Intelligent Content Organization**: Taking raw ideas and structuring them into logical, persuasive narratives
 2. **Adaptive Structuring**: Applying appropriate narrative frameworks based on presentation goals
-3. **Multi-Format Output**: Generating markdown that works across platforms (Gamma, PowerPoint, PDFs, speaker notes)
+3. **Gamma-Style HTML Generation**: Creating self-contained, accessible presentations that work on all devices
 4. **Smart Enhancements**: Adding visual suggestions, speaker notes, statistics, and call-to-action elements
 
 ## When to Use This Skill
@@ -39,6 +48,74 @@ Trigger this skill when users request:
 - "Expand this outline into a full presentation"
 - "Make this more engaging"
 - "Improve the flow of this deck"
+
+### Theming Requests
+- "Apply [brand name] theme to this presentation"
+- "Use [company] colors and branding"
+- "Create a presentation with [color] theme"
+- "Brand this presentation for [organization]"
+
+## Theming System
+
+The gamma-presentation-generator includes a comprehensive theming system that allows you to apply consistent branding (colors, typography, logos) to presentations.
+
+### Available Themes
+
+**Default Theme (Gamma AI)**: Purple/blue gradients with modern design
+**Bank Theme**: Professional corporate theme for financial institutions (#383B3E, #C41F3E)
+**AdaptiveX Theme**: Modern innovation theme with deep purple (#403c8b) for design/transformation
+**Ocean Theme**: Fresh blue-green theme for nature/environmental presentations
+**Sunset Theme**: Warm orange/red gradients for energetic presentations
+**Forest Theme**: Natural greens and browns for eco-friendly content
+**Minimal Dark**: Sleek dark theme for tech presentations
+
+See `gamma-presentation-generator/themes.md` for complete theme documentation and all available theme presets.
+
+### How to Apply Themes
+
+1. **Identify brand colors**: Use tools like Brandfetch (https://brandfetch.com/domain.com) to extract brand colors and logos
+2. **Select or create theme**: Choose from presets or create custom theme with brand colors
+3. **Replace :root values**: Update CSS custom properties in the HTML template
+4. **Add logo**: Include brand logo using the `.brand-logo` class
+5. **Test on mobile**: Ensure brand colors have sufficient contrast and readability
+
+### Theme Structure
+
+Themes use CSS custom properties (variables) for easy customization:
+
+```css
+:root {
+    --gamma-primary: #5E5ADB;      /* Primary brand color */
+    --gamma-accent: #FF6B6B;        /* Accent/CTA color */
+    --text-primary: #1A1F36;        /* Main text color */
+    --text-secondary: #4E5D78;      /* Secondary text color */
+    --bg-gradient-start: #F8F9FD;   /* Background gradient start */
+    --bg-gradient-end: #E8ECF4;     /* Background gradient end */
+    --card-bg: #FFFFFF;             /* Card background */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --card-radius: 20px;            /* Card border radius */
+    --logo-url: url('LOGO_URL');    /* Brand logo URL */
+}
+```
+
+### Using Brandfetch for Brand Theming
+
+When users request branded presentations:
+
+1. Visit `https://brandfetch.com/[company-domain].com`
+2. Extract:
+   - Primary colors (hex codes)
+   - Accent colors
+   - Logo URLs (SVG or PNG)
+   - Typography/fonts
+3. Create theme using extracted values
+4. Apply to presentation
+
+Example: For a financial institution using the Bank theme:
+- Primary: #383B3E (Corporate gray)
+- Accent: #C41F3E (Professional red)
+- Logo: Extract logo URL from Brandfetch
+- Typography: Professional corporate fonts
 
 ## Instructions
 
@@ -208,29 +285,434 @@ When appropriate, suggest images by adding:
 
 ### 7. Output Format
 
-Always provide:
+Generate a vertical-scrolling HTML document with Gamma AI-style cards. Always provide:
 
-1. **The Markdown Content** (ready to convert)
-2. **Speaker Notes** (if requested)
-3. **Image Suggestions** (if relevant)
-4. **Customization Tips**
+1. **Self-contained HTML file** (no external dependencies)
+2. **Vertical scrolling navigation** (not horizontal slides)
+3. **Mobile-responsive cards** (that grow to fit content)
+4. **Minimum readable font sizes** (never shrink below 16px)
 
-Example output structure:
-```
-Here's your presentation about [topic]:
+#### HTML Template Structure:
 
-[MARKDOWN CONTENT]
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Presentation Title]</title>
+    <style>
+        :root {
+            --gamma-primary: #5E5ADB;
+            --gamma-accent: #FF6B6B;
+            --text-primary: #1A1F36;
+            --text-secondary: #4E5D78;
+            --max-width: 1100px;
+            --card-radius: 20px;
+            --font-base: max(16px, min(2vw, 18px));
+            --font-h1: max(32px, min(6vw, 48px));
+            --font-h2: max(24px, min(4vw, 36px));
+        }
 
----
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-**Customization Suggestions:**
-- Consider adding [specific data] to slide 3
-- Include your company logo on the title slide
-- Add team photos to slide 5
+        html {
+            scroll-behavior: smooth;
+        }
 
-**Image Suggestions:**
-- Slide 2: [Image description]
-- Slide 4: [Image description]
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #F8F9FD 0%, #E8ECF4 100%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 60px 20px;
+        }
+
+        /* Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(94, 90, 219, 0.1);
+            z-index: 1000;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gamma-primary), var(--gamma-accent));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Slides */
+        .slide {
+            margin-bottom: 80px;
+            scroll-margin-top: 20px;
+        }
+
+        /* Cards - THE KEY COMPONENT */
+        .gamma-card {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Colored accent bar */
+        .gamma-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gamma-primary), var(--gamma-accent));
+        }
+
+        .card-content {
+            padding: 56px;
+        }
+
+        /* CRITICAL: Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 40px 15px;
+            }
+
+            .slide {
+                margin-bottom: 50px;
+            }
+
+            /* THIS IS THE KEY INNOVATION */
+            .gamma-card {
+                min-height: auto !important; /* Cards grow naturally */
+                height: auto !important;
+            }
+
+            .card-content {
+                padding: 32px 24px;
+            }
+
+            /* Enforce minimum readable sizes */
+            h1 {
+                font-size: max(32px, 8vw) !important;
+            }
+            h2 {
+                font-size: max(24px, 6vw) !important;
+            }
+            p, li {
+                font-size: max(16px, 4vw) !important;
+                line-height: 1.6;
+            }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: var(--font-h1);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--gamma-primary), var(--gamma-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: var(--font-h2);
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: max(18px, min(3vw, 24px));
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        p {
+            font-size: var(--font-base);
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 16px;
+            font-size: var(--font-base);
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gamma-primary);
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        ol {
+            counter-reset: item;
+            padding-left: 0;
+        }
+
+        ol li {
+            counter-increment: item;
+        }
+
+        ol li::before {
+            content: counter(item) ".";
+            position: absolute;
+            left: 0;
+            color: var(--gamma-primary);
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            background: linear-gradient(135deg, #F8F9FD, #E8ECF4);
+            border-left: 4px solid var(--gamma-primary);
+            padding: 24px 32px;
+            margin: 24px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        /* Strong/Bold */
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Center layout for title slides */
+        .center {
+            text-align: center;
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Feature grids */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 640px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-box {
+            background: linear-gradient(135deg, #F8F9FD, #FFFFFF);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(94,90,219,0.08);
+        }
+
+        .feature-box h3 {
+            margin-bottom: 12px;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Subtitle styling */
+        .subtitle {
+            font-size: max(18px, min(3vw, 22px));
+            color: var(--text-secondary);
+            margin-top: 12px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <main class="presentation">
+        <!-- Example: Title Slide -->
+        <section class="slide">
+            <div class="gamma-card">
+                <div class="card-content center">
+                    <h1>Presentation Title</h1>
+                    <p class="subtitle">Subtitle or tagline</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example: Content Slide -->
+        <section class="slide">
+            <div class="gamma-card">
+                <div class="card-content">
+                    <h2>Section Title</h2>
+                    <h3>Subsection</h3>
+                    <p>Introduction paragraph explaining the concept.</p>
+                    <ul>
+                        <li>First key point</li>
+                        <li>Second key point</li>
+                        <li>Third key point</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example: Feature Grid Slide -->
+        <section class="slide">
+            <div class="gamma-card">
+                <div class="card-content">
+                    <h2>Features</h2>
+                    <div class="feature-grid">
+                        <div class="feature-box">
+                            <h3>🚀 Feature One</h3>
+                            <p>Description of the first feature.</p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>💡 Feature Two</h3>
+                            <p>Description of the second feature.</p>
+                        </div>
+                        <div class="feature-box">
+                            <h3>🎯 Feature Three</h3>
+                            <p>Description of the third feature.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example: Two Column Slide -->
+        <section class="slide">
+            <div class="gamma-card">
+                <div class="card-content">
+                    <h2>Comparison</h2>
+                    <div class="two-column">
+                        <div>
+                            <h3>Column One</h3>
+                            <ul>
+                                <li>Point A</li>
+                                <li>Point B</li>
+                                <li>Point C</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Column Two</h3>
+                            <ul>
+                                <li>Point X</li>
+                                <li>Point Y</li>
+                                <li>Point Z</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example: Quote/Blockquote Slide -->
+        <section class="slide">
+            <div class="gamma-card">
+                <div class="card-content">
+                    <h2>Key Insight</h2>
+                    <blockquote>
+                        "An impactful quote or important callout that emphasizes the main message."
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY /
+                (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.gamma-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Optional: Keyboard navigation for vertical scrolling
+        document.addEventListener('keydown', (e) => {
+            const slides = document.querySelectorAll('.slide');
+            const currentSlide = Array.from(slides).findIndex(slide => {
+                const rect = slide.getBoundingClientRect();
+                return rect.top >= 0 && rect.top < window.innerHeight / 2;
+            });
+
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                if (currentSlide < slides.length - 1) {
+                    slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentSlide > 0) {
+                    slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
 ```
 
 ### 8. Integration with Other Skills
@@ -319,14 +801,23 @@ $9.99/month vs $400+/month for human tutors
 
 ### Final Notes
 
-- Always optimize for mobile viewing (cards that grow, not shrink)
-- Maintain minimum font sizes (16px body, 24px headers)
-- Use semantic markdown for better conversion
-- Include metadata comments for enhanced processing
+**CRITICAL - Gamma AI Philosophy:**
+- **Always generate self-contained HTML files** - No reveal.js or external dependencies
+- **Vertical scrolling ONLY** - Never use horizontal slide navigation
+- **Cards grow on mobile** - Use `height: auto !important` on mobile viewports
+- **Enforce minimum font sizes** - Use CSS `max()` to prevent text shrinking below 16px
+- **Content determines card height** - Never use fixed heights that cut off content
+- **Progressive enhancement** - Works without JavaScript, enhanced with it
+- **Semantic HTML** - Proper heading hierarchy and accessibility
+
+**Content Guidelines:**
 - Prioritize clarity over cleverness
 - When in doubt, use fewer words
+- Test on mobile devices (the most important viewport)
+- Ensure all content is readable without zooming
 
-This instruction set ensures consistent, high-quality presentation generation that follows the Gamma AI vertical-scroll philosophy while remaining flexible enough to handle various content types and user needs.
+**The Result:**
+Self-contained, accessible, mobile-first presentations that work offline and look beautiful on all devices - from 4" phones to 27" monitors. This is the Gamma AI advantage.
 
 ## Workflow
 
@@ -723,14 +1214,12 @@ Adjust content based on audience:
 - **General**: Use analogies, avoid jargon
 - **Mixed**: Layer information with optional depth
 
-### Multi-Format Export
+### Export Formats
 
-Generate variations optimized for:
-- **Gamma**: Vertical scroll, responsive cards
-- **PowerPoint**: Traditional slides, 16:9 ratio
-- **PDF Handout**: Include all speaker notes
-- **Speaker Script**: Full text with timing
-- **Blog Post**: Narrative version of content
+The primary output is Gamma AI-style HTML with vertical scrolling:
+- **Gamma HTML** (Primary): Vertical scroll, responsive cards, self-contained file
+- **Print/PDF Export**: Presentations can be printed or saved as PDF using browser print function
+- **Accessibility**: Screen reader compatible with semantic HTML and ARIA labels
 
 ## Troubleshooting
 
@@ -816,3 +1305,295 @@ To use this skill effectively:
 6. **Review quality**: Use the checklist before finalizing
 
 The result: Presentations that communicate clearly, engage audiences, and work beautifully across all devices and formats.
+
+## Core Gamma AI Principles
+
+These principles define what makes a Gamma-style presentation superior to traditional slide formats:
+
+### 1. Vertical Scrolling
+- **Natural web-like navigation**: Users scroll down, not click through horizontal slides
+- **Continuous flow**: Content flows naturally like a webpage, not discrete chunks
+- **Familiar interaction**: Everyone knows how to scroll; it's intuitive and accessible
+- **No pagination anxiety**: Users can see their progress and navigate freely
+
+### 2. Cards Grow on Mobile
+- **Content-first sizing**: Cards expand to fit content, not the other way around
+- **No text shrinking**: Font sizes never drop below readable minimums (16px body, 24px h2, 32px h1)
+- **Natural height**: Use `height: auto !important` on mobile to let cards breathe
+- **Responsive by design**: Same content works on 4" phones and 27" monitors
+
+### 3. Minimum Font Sizes
+- **Always readable**: Use CSS `max()` function to enforce minimums
+  - Body: `max(16px, min(2vw, 18px))`
+  - H2: `max(24px, min(4vw, 36px))`
+  - H1: `max(32px, min(6vw, 48px))`
+- **No squinting**: Text remains legible on all screen sizes
+- **Accessibility first**: Readable text benefits everyone, especially mobile users
+
+### 4. No External Dependencies
+- **Self-contained files**: Everything in one HTML file (CSS and JavaScript inline)
+- **Works offline**: No CDN dependencies means presentations work anywhere
+- **Future-proof**: No broken links when external services change
+- **Fast loading**: No network requests means instant presentation loading
+
+### 5. Progressive Enhancement
+- **Works without JavaScript**: Core content is accessible even if JS fails
+- **Enhanced with JS**: Smooth scrolling, progress bar, and keyboard nav are bonuses
+- **Semantic HTML**: Screen readers and accessibility tools work perfectly
+- **Print-friendly**: CSS can be adapted for print media queries
+
+## What NOT to Do
+
+Critical mistakes that break the Gamma philosophy:
+
+### ❌ Don't Use Fixed Heights for Cards
+```css
+/* WRONG */
+.gamma-card {
+    height: 600px; /* This forces content to fit a box */
+    overflow: hidden; /* This hides overflow content */
+}
+
+/* CORRECT */
+.gamma-card {
+    height: auto; /* Let content determine height */
+    min-height: auto; /* Don't enforce minimums */
+}
+```
+
+### ❌ Don't Scale Text Below 16px
+```css
+/* WRONG */
+@media (max-width: 768px) {
+    p { font-size: 12px; } /* Too small to read */
+}
+
+/* CORRECT */
+@media (max-width: 768px) {
+    p { font-size: max(16px, 4vw) !important; } /* Always readable */
+}
+```
+
+### ❌ Don't Use Horizontal Slide Navigation
+```javascript
+// WRONG - Don't use reveal.js or similar
+Reveal.initialize({
+    transition: 'slide',
+    navigation: 'horizontal'
+});
+
+// CORRECT - Use vertical scrolling
+window.scrollTo({ top: nextSlide.offsetTop, behavior: 'smooth' });
+```
+
+### ❌ Don't Require External Libraries
+```html
+<!-- WRONG -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+
+<!-- CORRECT -->
+<style>
+    /* All CSS inline */
+</style>
+<script>
+    // All JavaScript inline
+</script>
+```
+
+### ❌ Don't Use overflow: hidden on Content Containers
+```css
+/* WRONG */
+.card-content {
+    overflow: hidden; /* Cuts off long content */
+    max-height: 500px; /* Forces artificial limits */
+}
+
+/* CORRECT */
+.card-content {
+    overflow: visible; /* Let content show naturally */
+    height: auto; /* No artificial limits */
+}
+```
+
+## Testing the Implementation
+
+Use these test cases to verify your Gamma presentations work correctly:
+
+### Test 1: Mobile Responsiveness Test
+**Objective**: Verify cards grow to fit content on mobile devices
+
+**Steps**:
+1. Create a slide with 20+ bullet points (lots of content)
+2. Open the HTML file in a browser
+3. Resize window to mobile width (<768px)
+4. Inspect the slide card
+
+**Expected Results**:
+- ✅ Card grows taller to accommodate all content
+- ✅ Text stays at 16px or larger
+- ✅ All bullet points are visible without scrolling within the card
+- ✅ No horizontal scrolling required
+- ❌ Card does NOT have a fixed height
+- ❌ Text does NOT shrink below 16px
+
+### Test 2: Vertical Scroll Navigation Test
+**Objective**: Ensure navigation is vertical, not horizontal
+
+**Steps**:
+1. Open the presentation in a browser
+2. Try to navigate using:
+   - Mouse scroll wheel
+   - Arrow down/up keys
+   - Spacebar
+   - Touch swipe (on mobile)
+
+**Expected Results**:
+- ✅ Scrolling is smooth and vertical
+- ✅ Arrow keys move between slides vertically
+- ✅ Progress bar updates as you scroll
+- ❌ No left/right arrow navigation
+- ❌ No horizontal sliding transitions
+
+### Test 3: Offline Functionality Test
+**Objective**: Verify presentation works without internet connection
+
+**Steps**:
+1. Save the HTML file to your local computer
+2. Disconnect from the internet
+3. Open the HTML file in a browser
+
+**Expected Results**:
+- ✅ Presentation loads instantly
+- ✅ All styles render correctly
+- ✅ JavaScript features work (progress bar, keyboard nav)
+- ✅ No broken resources or missing elements
+- ❌ No error messages about failed CDN requests
+- ❌ No missing fonts or styles
+
+### Test 4: Font Size Minimum Test
+**Objective**: Confirm text never shrinks below readable sizes
+
+**Steps**:
+1. Open presentation in browser
+2. Use browser DevTools to simulate various screen sizes:
+   - 320px (small phone)
+   - 375px (iPhone SE)
+   - 768px (tablet)
+   - 1024px (laptop)
+   - 1920px (desktop)
+3. Inspect font sizes using DevTools computed styles
+
+**Expected Results**:
+- ✅ Body text: Never below 16px
+- ✅ H2 headings: Never below 24px
+- ✅ H1 titles: Never below 32px
+- ✅ All text is easily readable at all sizes
+- ❌ No text smaller than 16px at any viewport width
+
+### Test 5: Long Content Card Growth Test
+**Objective**: Verify cards expand naturally for varying content lengths
+
+**Steps**:
+1. Create three slides:
+   - Slide A: 3 bullet points (short content)
+   - Slide B: 15 bullet points (medium content)
+   - Slide C: 30 bullet points (long content)
+2. View on mobile (<768px) and desktop (>1024px)
+
+**Expected Results**:
+- ✅ All three slides have different heights based on content
+- ✅ Slide C is much taller than Slide A
+- ✅ All content is visible without internal scrolling
+- ✅ No "view more" buttons or truncation
+- ❌ Cards are NOT the same height
+- ❌ No content is cut off or hidden
+
+### Test 6: Accessibility Test
+**Objective**: Ensure presentations work with assistive technologies
+
+**Steps**:
+1. Run browser accessibility audit (Chrome DevTools Lighthouse)
+2. Test with screen reader (NVDA, JAWS, or VoiceOver)
+3. Test keyboard-only navigation
+
+**Expected Results**:
+- ✅ Lighthouse accessibility score >90
+- ✅ Screen reader can navigate all content
+- ✅ Heading hierarchy is logical (H1 → H2 → H3)
+- ✅ All content accessible via keyboard
+- ✅ Focus indicators are visible
+- ❌ No accessibility errors or warnings
+
+### Test 7: Print/PDF Export Test
+**Objective**: Verify presentations can be printed or saved as PDF
+
+**Steps**:
+1. Open presentation in browser
+2. Use Print Preview (Ctrl/Cmd + P)
+3. Check how slides appear in print layout
+
+**Expected Results**:
+- ✅ Each card appears on the page
+- ✅ Content is readable in print preview
+- ✅ Colors are preserved or have good contrast
+- ✅ No content is cut off at page boundaries
+- ✅ Can save as PDF successfully
+
+## Troubleshooting Common Issues
+
+### Issue: Cards Have Fixed Height on Mobile
+
+**Symptom**: Content is cut off or requires scrolling within cards on mobile devices
+
+**Solution**:
+```css
+@media (max-width: 768px) {
+    .gamma-card {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+    }
+}
+```
+
+### Issue: Text is Too Small on Mobile
+
+**Symptom**: Font sizes drop below 16px on small screens
+
+**Solution**:
+```css
+@media (max-width: 768px) {
+    p, li {
+        font-size: max(16px, 4vw) !important;
+    }
+    h2 {
+        font-size: max(24px, 6vw) !important;
+    }
+    h1 {
+        font-size: max(32px, 8vw) !important;
+    }
+}
+```
+
+### Issue: Presentation Requires Internet Connection
+
+**Symptom**: Styles or scripts fail to load when offline
+
+**Solution**: Ensure all CSS and JavaScript are inline in the HTML file. Remove any external `<link>` or `<script src="">` tags that reference CDNs.
+
+### Issue: Horizontal Scrolling Appears
+
+**Symptom**: Users can scroll left/right, content overflows horizontally
+
+**Solution**:
+```css
+body {
+    overflow-x: hidden;
+}
+
+.gamma-card {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+```
